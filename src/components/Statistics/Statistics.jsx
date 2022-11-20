@@ -6,8 +6,7 @@ const List = styled.ul`
   list-style: none;
 `;
 
-export const Statistics = ({ data: { good, neutral, bad } }) => {
-  const total = good + neutral + bad;
+export const Statistics = ({ good, neutral, bad, total, percentage }) => {
   return total === 0 ? (
     <Notification text="There is no feedback" />
   ) : (
@@ -16,11 +15,15 @@ export const Statistics = ({ data: { good, neutral, bad } }) => {
       <li>Neutral: {neutral}</li>
       <li>Bad: {bad}</li>
       <li>Total: {total}</li>
-      <li>Positive feedback: {Math.round((good / total) * 100) || `0`}%</li>
+      <li>Positive feedback: {percentage}%</li>
     </List>
   );
 };
 
 Statistics.propTypes = {
-  data: PropTypes.array.isRequired,
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  total: PropTypes.number,
+  percentage: PropTypes.number,
 };
